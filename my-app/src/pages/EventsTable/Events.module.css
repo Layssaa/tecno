@@ -1,0 +1,43 @@
+.subtitle{
+    font-size: 1.5em;
+}
+
+.toLabel {
+    align-self: flex-start;
+    padding-left: 5vw;
+}
+
+.form{
+    width: 50vw;
+    height: 100vh;
+    background-color: #202020;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+
+    text-align: start;
+    box-shadow: 10px 10px 4px #0E0E0E;
+}
+
+.titleEvents{
+    background: #71aca1;
+    width: 15vw;
+    padding: 2vh 3vw;
+    text-align: center;
+    border-radius: 4px;
+    font-size: 1.5em;
+}
+
+.list {
+    height: 80%;
+}
+
+.requests {
+    width: 40vw;
+    height: 7vh;
+    border-radius: 3px;
+    border: 1px solid #343434;
+    background: #2C2B2B;
+}

@@ -1,0 +1,38 @@
+.loginUserClasses{
+    position: absolute;
+    height: 90vh;
+    right: 10vw;
+}
+
+.containerleft{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.btnsingup{
+    background: #8850BF;
+    border: none;
+    width: 25vw;
+    height: 7vh;
+    font-size: 1.5em;
+    cursor:pointer;
+    border-radius: 3px;
+}
+
+.btnsingup:hover{
+    background: rgb(124, 77, 172);
+}
+
+
+.btnChangeUser{
+    cursor: pointer;
+}
+
+.btnChangeUser:hover{
+    color: #ddc3f7;
+}

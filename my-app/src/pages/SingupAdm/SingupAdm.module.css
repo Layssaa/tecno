@@ -1,0 +1,65 @@
+.form{
+    width: 40vw;
+    height: 80vh;
+    background-color: #202020;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+    border-radius: 6px;
+
+    text-align: start;
+}
+
+
+.form div{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.requests{
+    width: 33vw;
+    height: 5vh;
+    border-radius: 3px;
+    border: 1px solid #343434;
+    background: #2C2B2B;
+}
+
+.requests::placeholder{
+    padding-left: 1vw;
+}
+
+.btnChangeUser{
+    cursor: pointer;
+}
+
+.btnChangeUser:hover{
+    color: #cdf3eb;
+}
+
+
+.btnsingup{
+    background: #71aca1;
+    border: none;
+    width: 25vw;
+    height: 7vh;
+    font-size: 1.5em;
+    cursor:pointer;
+    border-radius: 3px;
+
+}
+
+.btnsingup:hover{
+    background-color: #579186;
+}
+
+.toLabel {
+    align-self: flex-start;
+}
+
+.inLabel{
+    align-self: flex-start;
+    padding-left: 3.3vw;
+}
