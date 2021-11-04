@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "node server.js"
   },
   "author": "",
@@ -16,6 +16,12 @@
     "express": "^4.17.1",
     "fs": "^0.0.1-security",
     "morgan": "^1.10.0",
-    "qrcode-generator": "^1.4.4"
+    "nodemon": "^2.0.14",
+    "qrcode-generator": "^1.4.4",
+    "supertest": "^6.1.6"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "mocha": "^9.1.3"
   }
 }

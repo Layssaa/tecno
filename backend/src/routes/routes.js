@@ -9,8 +9,8 @@ const qr = qrcode(typeNumber, errorCorrectionLevel);
 
 // --------- QR TESTE -------------
 router.get("/qrcode", async (req, res) => {
-    await qr.addData("TesteQrCode")
-    await qr.make()
+    await qr.addData(req.query.data);
+    await qr.make();
     res.send(await qr.createImgTag())
 });
 
