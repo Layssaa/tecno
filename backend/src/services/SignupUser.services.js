@@ -6,7 +6,7 @@ const readTheFile = require("./readFile.services");
 const signupUSERservice = async (user) => {
     const token = new Date().getTime();
     let session = {};
-        let userToSend= {}
+    let userToSend= {};
 
     try {
         const response = await readTheFile("./src/database/User.json");

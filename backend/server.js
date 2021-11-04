@@ -33,7 +33,4 @@ app.use("/user", routes_user);
 app.use(require('./src/routes/routes'));
 
 // -----------------------------------------------------------------------------------------------------//
-app.listen(process.env.PORT || PORT, function (err) {
-    if (err) console.log(err);
-    console.log("Server listening on PORT", PORT);
-});
+module.exports = app;
