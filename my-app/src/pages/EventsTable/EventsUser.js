@@ -1,21 +1,21 @@
-//import classes from "../Initial/Initial.module.css";
-//import eventsClasses from "./Events.module.css";
+import classes from "../Initial/Initial.module.css";
+import eventsClasses from "./Events.module.css";
 import eventsUser from "./EventsUser.module.css"
 
-//import { useHistory } from "react-router-dom";
-//import { useFormik } from 'formik';
-import { useContext, useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useFormik } from 'formik';
+import { useContext, useLayoutEffect, useState } from "react";
 import { MyContext } from "../../Context/Context";
 
 export default function EventsUser() {
     const { events, handleAddEvent } = useContext(MyContext);
     const [Qrcode, setQrCode] = useState();
 
-    //const history = useHistory();
+    const history = useHistory();
 
-    /* const changeUser = () => {
-        history.push("/login-user")
-    } */
+    const goToEvent = (id) => {
+        history.push(`/events/${id}`)
+    }
 
     const addEvent = async (id) => {
         console.log('FRONT-EVENTUSER');
@@ -23,7 +23,7 @@ export default function EventsUser() {
         setQrCode(await handleAddEvent(id));
     }
 
-    /* const formik = useFormik({
+    const formik = useFormik({
         initialValues: {
             title: '',
             description: '',
@@ -34,13 +34,13 @@ export default function EventsUser() {
         onSubmit: values => {
             alert(JSON.stringify(values, null, 2));
         },
-    }); */
+    });
 
     return (
         <div className="App">
 
-            {!Qrcode? null:
-           <Qrcode/>
+            {!Qrcode ? null :
+                <img src={Qrcode} width="80vw" height="100vh" />
             }
 
             <div className={eventsUser.container} >
@@ -51,10 +51,10 @@ export default function EventsUser() {
                             console.log(element.id);
                             return (
                                 <div className={eventsUser.listItem} key={index}>
-                                    <div className={eventsUser.boxEvent}>
+                                    <div className={eventsUser.boxEvent} onClick={() => goToEvent(element.id)}>
                                         <p>{element.title} - {element.units} - {element.time}</p>
                                     </div>
-                                    <button className={eventsUser.addEvent} onClick={() => addEvent(element.id)}>JOIN</button>
+                                    {/* <button className={eventsUser.addEvent} onClick={() => addEvent(element.id)}>JOIN</button> */}
                                 </div>)
                         })}
 

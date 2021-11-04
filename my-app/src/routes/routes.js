@@ -5,8 +5,16 @@ import SingupAdm from "../pages/SingupAdm/SingupAdm";
 import SingupUser from "../pages/SingupUser/SingupUser";
 import LoginAdm from "../pages/LoginAdm/LoginAdm";
 import LoginUser from "../pages/LoginUser/LoginUser";
+import OnlyEvent from "../pages/OnlyEvent/OnlyEvent";
 
 export const routers = [
+    {
+        name: "events",
+        Component: OnlyEvent,
+        path: "/events/:id",
+        isVisible: false,
+        isPrivate: false
+    },
     {
         name: "events",
         Component: EventsUser,

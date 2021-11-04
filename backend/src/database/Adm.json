@@ -1,1 +1,15 @@
-[{"id":"0","fullname":"0","username":"0","email":"0"},{"id":2,"hash":"$2b$10$717ToAGmgzpSCOjILckY4e9sh8yavPf1uq0bbeT/8/exgGJDLi6vS","fullname":"Layssa","username":"Lay","email":"Layssa@araujo.com"},{"id":3,"hash":"$2b$10$CLY1TUQHc1EqKZ919ozeX.scFiE7qMreyOZxra3OmmpII07P3G8Vq","username":"miguel","password":"blabla","fullname":"Miguel","email":"migueljnm840@gmail.com"}]
+[
+    {
+        "id": "0",
+        "fullname": "0",
+        "username": "0",
+        "email": "0"
+    },
+    {
+        "id": 2,
+        "hash": "$2b$10$717ToAGmgzpSCOjILckY4e9sh8yavPf1uq0bbeT/8/exgGJDLi6vS",
+        "fullname": "Layssa",
+        "username": "Lay",
+        "email": "Layssa@araujo.com"
+    }
+]

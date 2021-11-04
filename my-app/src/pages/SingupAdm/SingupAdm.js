@@ -4,7 +4,7 @@ import loginClasses from "./SingupAdm.module.css"
 
 import { useHistory } from "react-router-dom";
 import { useFormik } from 'formik';
-//import { SignUp_ADM } from "../../Services/Adm_request";
+import { SignUp_ADM } from "../../Services/Adm_request";
 
 export default function SingupAdm() {
     const history = useHistory();
@@ -14,7 +14,7 @@ export default function SingupAdm() {
     }
 
     const goEvents = async (values) => {
-        //const response = await SignUp_ADM(values)
+        const response = await SignUp_ADM(values)
         history.push("/events-adm")
     }
 
