@@ -3,7 +3,7 @@ import classes from "../Initial/Initial.module.css";
 import loginClasses from "./LoginAdm.module.css";
 import { useHistory } from "react-router-dom";
 import { useFormik } from 'formik';
-import { Login_ADM } from "../../Services/Adm_request";
+//import { Login_ADM } from "../../Services/Adm_request";
 import { useContext } from "react";
 import { MyContext } from "../../Context/Context";
 

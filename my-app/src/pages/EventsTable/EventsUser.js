@@ -1,21 +1,21 @@
-import classes from "../Initial/Initial.module.css";
-import eventsClasses from "./Events.module.css";
+//import classes from "../Initial/Initial.module.css";
+//import eventsClasses from "./Events.module.css";
 import eventsUser from "./EventsUser.module.css"
 
-import { useHistory } from "react-router-dom";
-import { useFormik } from 'formik';
-import { useContext, useLayoutEffect, useState } from "react";
+//import { useHistory } from "react-router-dom";
+//import { useFormik } from 'formik';
+import { useContext, useState } from "react";
 import { MyContext } from "../../Context/Context";
 
 export default function EventsUser() {
     const { events, handleAddEvent } = useContext(MyContext);
     const [Qrcode, setQrCode] = useState();
 
-    const history = useHistory();
+    //const history = useHistory();
 
-    const changeUser = () => {
+    /* const changeUser = () => {
         history.push("/login-user")
-    }
+    } */
 
     const addEvent = async (id) => {
         console.log('FRONT-EVENTUSER');
@@ -23,7 +23,7 @@ export default function EventsUser() {
         setQrCode(await handleAddEvent(id));
     }
 
-    const formik = useFormik({
+    /* const formik = useFormik({
         initialValues: {
             title: '',
             description: '',
@@ -34,7 +34,7 @@ export default function EventsUser() {
         onSubmit: values => {
             alert(JSON.stringify(values, null, 2));
         },
-    });
+    }); */
 
     return (
         <div className="App">

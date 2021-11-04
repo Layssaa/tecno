@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Login_ADM, RegisterEvent_ADM } from "../Services/Adm_request";
-import { AddEvent_USER, login_USER, SignUp_USER } from "../Services/User_request";
+import React, { useState } from "react";
+import { Login_ADM } from "../Services/Adm_request";
+import { login_USER } from "../Services/User_request";
 
 
 export const MyContext = React.createContext({
@@ -53,18 +53,18 @@ export function MyProvider({ children }) {
     }
 
     const handleRegisterEvent = async (_event) => {
-        const response = await RegisterEvent_ADM(_event);
+        //const response = await RegisterEvent_ADM(_event);
         setEvents(prevState => prevState.concat(_event));
     }
 
     const handleSignupUser = async (_user) => {
-        const response = await SignUp_USER(_user);
+        //const response = await SignUp_USER(_user);
     }
 
     const handleAddEvent = async (idEvent) => {
         console.log("========= ID EVENT ==========");
         console.log(idEvent);
-        const response = await AddEvent_USER(idEvent);
+        //const response = await AddEvent_USER(idEvent);
         // return response;
     }
 

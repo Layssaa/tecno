@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { routers } from './routes';
 
 // function CustomRoute(props) {
