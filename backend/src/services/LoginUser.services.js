@@ -1,38 +1,43 @@
 const fs = require('fs');
-const { EncryptUserDataBcrypt } = require("../middleware/EncryptUser");
-const readTheFile = require("./readFile");
+const { AuthenticUserBcrypt, EncryptUserDataBcrypt } = require("../middleware/EncryptUser.middleware");
+const readTheFile = require("./readFile.services");
 
-
-const signupUSERservice = async (user) => {
+const LoginUserService = async (user, cookie, validation) => {
     const token = new Date().getTime();
     let session = {};
-        let userToSend= {}
-
+    let data;
+    console.log("============ USER ==============");
+    console.log(user);
+    console.log("================================");
     try {
         const response = await readTheFile("./src/database/User.json");
 
         console.log("=======RESPONSE=======");
         console.log(response);
 
-        userVerify = await response.find(element => element.email == user.email || element.username == user.username);
+        userVerify = await response.find(element => element.email == user.email);
         console.log('--------------VERIFY-----------------');
         console.log(userVerify);
 
-        if (userVerify !== undefined) {
-            throw new Error("User Already Exist.");
+        if (userVerify == undefined) {
+            throw new Error("User not found!");
         }
 
-        const { hash } = await EncryptUserDataBcrypt(user.password, user.email);
-        const ID = response.length + 1;
+        const authenticUser = await AuthenticUserBcrypt(user.password, user.email, userVerify.hash);
 
-        //  ---------------- USER --------------------
-        userToSend = {
-            id: ID,
-            hash: hash,
-            fullname: user.fullname,
-            username: user.username,
-            email: user.email
+        if (!authenticUser) {
+            throw new Error("Invalid password")
         }
+
+        let eventsList = await readTheFile("./src/database/Events.json");
+
+        data = {
+            hash: userVerify.hash,
+            events: eventsList
+        }
+
+        console.log('--------------INFO TO SEND-----------------');
+        console.log(data);
 
         //  ---------------- SESSION -----------------
         const sessionHash = await EncryptUserDataBcrypt(token, user.email);
@@ -42,30 +47,22 @@ const signupUSERservice = async (user) => {
 
         session = {
             token: sessionHash.hash,
-            user_id: ID,
+            hash:userVerify.hash,
+            user_id: userVerify.id,
             creat_At: token,
             experies_In: experies_In
         }
 
-        console.log('--------------USER TO SEND-----------------');
-        console.log(userToSend);
-
         // ---------------- New Lists ----------------
-        let userList = await response.concat(userToSend);
         let newListSession = sessionsList.concat(session);
 
         console.log('--------------NEW LIST-----------------');
-        console.log(userList);
+        console.log(newListSession);
 
-        fs.writeFile("./src/database/User.json", `${JSON.stringify(userList)}`, () => {
-            console.log("Cadastrado!");
-        });
 
         fs.writeFile("./src/database/Session.json", `${JSON.stringify(newListSession)}`, () => {
             console.log("Sessão cadastrada!");
         });
-
-
 
     } catch (err) {
         console.log('DEU ERRO');
@@ -73,7 +70,7 @@ const signupUSERservice = async (user) => {
         return err
     }
 
-    return { session }
+    return { session, data }
 }
 
-module.exports = { signupUSERservice };
+module.exports = { LoginUserService };

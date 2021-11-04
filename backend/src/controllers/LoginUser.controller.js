@@ -1,8 +1,7 @@
-const { LoginAdmService } = require("../services/LoginAdm");
-const readTheFile = require("../services/readfile");
+const { LoginUserService } = require("../services/LoginUser.services");
+const readTheFile = require("../services/readFile.services");
 
-const LoginAdm = async (req, res) => {
-
+const LoginUser = async (req, res) => {
     const user = req.body;
     const { cookies } = req;
 
@@ -10,13 +9,9 @@ const LoginAdm = async (req, res) => {
     console.log(user);
 
     const validation = await validationCookies(cookies);
-    console.log("teste de cookies ");
-    console.log(validation);
 
     try {
-        console.log('========requisition============');
-        const { data, session } = await LoginAdmService(user, cookies.user, validation);
-        
+        const { data, session } = await LoginUserService(user, cookies.user, validation);
         console.log("Enviado ao cookie");
         console.log(session);
 
@@ -53,4 +48,4 @@ const validationCookies = async (cookies) => {
     return cookies
 }
 
-module.exports = { LoginAdm };
+module.exports = { LoginUser };

@@ -1,6 +1,6 @@
-const { LoginUser } = require('../controllers/LoginUser');
-const { signupUSER } = require('../controllers/SignupUser');
-const { AddEventUSER } = require('../controllers/AddEvent');
+const { LoginUser } = require('../controllers/LoginUser.controller');
+const { signupUSER } = require('../controllers/SignupUser.controller');
+const { AddEventUSER } = require('../controllers/AddEvent.controller');
 
 // --------------------- USER ROUTES  ---------------------------
 const routerUser = require('express').Router();

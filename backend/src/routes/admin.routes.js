@@ -1,6 +1,6 @@
-const { LoginAdm } = require('../controllers/LoginAdm');
-const { RegisterEvent } = require('../controllers/RegisterEvent');
-const { signupADM } = require('../controllers/SignupAdm');
+const { LoginAdm } = require('../controllers/LoginAdm.controller');
+const { RegisterEvent } = require('../controllers/RegisterEvent.controller');
+const { signupADM } = require('../controllers/SignupAdm.controller');
 
 // --------------------- ADMIN ROUTES  ---------------------------
 const routerAdmin = require('express').Router();

@@ -1,4 +1,4 @@
-const { signupADMService } = require("../services/SignupAdm");
+const { signupADMService } = require("../services/SignupAdm.services");
 
 const signupADM = async (req, res) => {
     console.log("REQ BODY IN SIGNUP ADMIN");

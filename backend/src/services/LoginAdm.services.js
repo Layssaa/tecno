@@ -1,6 +1,6 @@
 const fs = require('fs');
-const { AuthenticUserBcrypt, EncryptUserDataBcrypt } = require("../middleware/EncryptUser");
-const readTheFile = require("./readFile");
+const { AuthenticUserBcrypt, EncryptUserDataBcrypt } = require("../middleware/EncryptUser.middleware");
+const readTheFile = require("./readFile.services");
 
 const LoginAdmService = async (user, cookie, validation) => {
     const token = new Date().getTime();

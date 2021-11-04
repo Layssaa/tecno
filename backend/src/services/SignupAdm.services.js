@@ -1,6 +1,6 @@
 const fs = require('fs');
-const { EncryptUserDataBcrypt } = require("../middleware/EncryptUser");
-const readTheFile = require("./readFile");
+const { EncryptUserDataBcrypt } = require("../middleware/EncryptUser.middleware");
+const readTheFile = require("./readFile.services");
 
 
 const signupADMService = async (user) => {

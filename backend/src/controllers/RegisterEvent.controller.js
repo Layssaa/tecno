@@ -1,5 +1,5 @@
-const readTheFile = require("../services/readfile");
-const { RegisterEventService } = require("../services/RegisterEvent")
+const readTheFile = require("../services/readFile.services");
+const { RegisterEventService } = require("../services/RegisterEvent.services")
 
 const RegisterEvent = async (req, res) => {
     const event = req.body;

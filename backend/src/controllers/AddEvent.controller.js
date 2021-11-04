@@ -1,6 +1,6 @@
-const readTheFile = require("../services/readfile");
-const { AddEventService_USER } = require("../services/AddEvent");
-const { MakeQrCode } = require("../middleware/MakeQrCode");
+const readTheFile = require("../services/readFile.services");
+const { AddEventService_USER } = require("../services/AddEvent.services");
+const { MakeQrCode } = require("../middleware/MakeQrCode.middleware");
 
 const AddEventUSER = async (req, res) => {
     const idEvent = req.body;
