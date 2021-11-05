@@ -4,6 +4,7 @@ const supertest = require('supertest');
 const agent = supertest.agent(app);
 
 let cookies = [];
+let cookiesUser = [];
 
 describe("Test All Admin Routes", () => {
   it("it should test GET /admin", (done)  => {
@@ -61,3 +62,52 @@ describe("Test All Admin Routes", () => {
       });
   });
 });
+
+
+/* ------------------------------------------------------------------------------------------------------- */
+
+
+describe("Test All User Routes", () => {
+  it("it should test GET /user", (done)  => {
+    supertest(app)
+      .get("/user")
+      .expect("teste user")
+      .end((err, res) => {
+        if (err) done(err);
+        done();
+      });
+  });
+
+  it("it should test POST /user/signup", (done) => {
+    supertest(app)
+      .post("/user/signup")
+      .send({username: "asd", password: "asd", fullname: "Asd", email: "asd@asd.com"})
+      .expect("User register")
+      .end((err, res) => {
+        if (err) done(err);
+        console.log("----------------------------------------------------------------");
+        const cookies = res.headers['set-cookie'][0].split(',').map(item => item.split(';')[0]);
+        console.log(cookies);
+        console.log("----------------------------------------------------------------");
+        done();
+      });
+  });
+
+  it("it should test POST /user/login", (done) => {
+    supertest(app)
+      .post("/user/login")
+      .send({username: "asd", password: "asd", email: "asd@asd.com"})
+      .expect(200)
+      .end((err, res) => {
+        if (err) done(err);
+        console.log("----------------------------------------------------------------");
+        cookiesUser = res.headers['set-cookie'][0].split(',').map(item => item.split(';')[0]);
+        console.log(cookies);
+        console.log("----------------------------------------------------------------");
+        done();
+      });
+  });
+
+});
+
+
