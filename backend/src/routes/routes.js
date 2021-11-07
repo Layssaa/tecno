@@ -1,17 +1,14 @@
 const router = require('express').Router();
 
+const { doLogout } = require('../controllers/Logout');
+const { doVerify } = require('../controllers/Verify');
 
+// rotas de uso comum aos dois tipos de usuário
+// adicionada funções de logout
+//             &
+// verificação de cookie p utilizar no front
+router.get("/logout", doLogout)
+router.get("/verify", doVerify)
 
-const typeNumber = 4;
-const errorCorrectionLevel = 'L';
-const qrcode = require("qrcode-generator");
-const qr = qrcode(typeNumber, errorCorrectionLevel);
-
-// --------- QR TESTE -------------
-router.get("/qrcode", async (req, res) => {
-    await qr.addData(req.query.data);
-    await qr.make();
-    res.send(await qr.createImgTag())
-});
 
 module.exports = router;
