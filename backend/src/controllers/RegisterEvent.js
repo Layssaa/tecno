@@ -1,9 +1,16 @@
+// ADICIONADO VALIDAÇÃO DO EVENTO POR QUESTÕES DE UX, 
+// DATAS SEPARAS POR BARRA 
+// HORAS 00h00m
+
+const { ValidateEvent } = require("../middleware/ValidateEvent");
 const readTheFile = require("../services/readfile");
 const { RegisterEventService } = require("../services/RegisterEvent")
 
 const RegisterEvent = async (req, res) => {
     const event = req.body;
     const { cookies } = req;
+
+    const eventValid = await ValidateEvent(event);
 
     console.log("EVENT RECEBIDO NA REQUISITION");
     console.log(event);
@@ -14,7 +21,7 @@ const RegisterEvent = async (req, res) => {
 
     try {
         console.log('========requisition========');
-        const { data } = await RegisterEventService(event, cookies.user);
+        const { data } = await RegisterEventService(eventValid, cookies.user);
 
         console.log("Enviado storage");
         console.log(data);
