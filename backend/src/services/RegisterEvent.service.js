@@ -2,8 +2,8 @@
 
 const fs = require('fs');
 const { element } = require('prop-types');
-const { AuthenticUserBcrypt, EncryptUserDataBcrypt } = require("../middleware/EncryptUser");
-const readTheFile = require("./readFile");
+const { AuthenticUserBcrypt, EncryptUserDataBcrypt } = require("../middleware/EncryptUser.middleware");
+const readTheFile = require("./readFile.service");
 
 const RegisterEventService = async (event, hash) => {
     let data;

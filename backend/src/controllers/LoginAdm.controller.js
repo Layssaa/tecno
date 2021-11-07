@@ -1,5 +1,5 @@
-const { LoginAdmService } = require("../services/LoginAdm.services");
-const readTheFile = require("../services/readFile.services");
+const { LoginAdmService } = require("../services/LoginAdm.service");
+const readTheFile = require("../services/readFile.service");
 
 const LoginAdm = async (req, res) => {
 

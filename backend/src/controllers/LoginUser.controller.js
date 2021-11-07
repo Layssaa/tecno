@@ -1,5 +1,5 @@
-const { LoginUserService } = require("../services/LoginUser.services");
-const readTheFile = require("../services/readFile.services");
+const { LoginUserService } = require("../services/LoginUser.service");
+const readTheFile = require("../services/readFile.service");
 
 const LoginUser = async (req, res) => {
     const user = req.body;

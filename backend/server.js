@@ -7,8 +7,8 @@ const cookieparser = require("cookie-parser");
 const bcrypt = require('bcrypt');
 const qr = require("qrcode-generator");
 
-const routes_admin  = require('./src/routes/admin.routes');
-const routes_user = require("./src/routes/user.routes")
+const routes_admin  = require('./src/routes/admin');
+const routes_user = require("./src/routes/user")
 
 const PORT = 4000;
 

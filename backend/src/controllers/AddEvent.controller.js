@@ -1,5 +1,5 @@
-const readTheFile = require("../services/readFile.services");
-const { AddEventService_USER } = require("../services/AddEvent.services");
+const readTheFile = require("../services/readFile.service");
+const { AddEventService_USER } = require("../services/AddEvent.service");
 const { MakeQrCode } = require("../middleware/MakeQrCode.middleware");
 
 const AddEventUSER = async (req, res) => {
@@ -12,14 +12,21 @@ const AddEventUSER = async (req, res) => {
     const validation = await validationCookies(cookies);
 
     try {
-        const { data } = await AddEventService_USER(idEvent, cookies.user);
+        const { data, userVerify } = await AddEventService_USER(idEvent, cookies.user);
+        
         console.log(data.hash, data.event.id);
+        console.log(userVerify);
 
         const qrcodeImg = await MakeQrCode(data.hash, data.event.id);
+        const qrCodeURL = {
+            url: qrcodeImg
+        }
+        
         console.log("Enviado storage");
-        console.log(qrcodeImg);
-
+        console.log(qrCodeURL);
+        
         res.send(qrcodeImg);
+
     }
     catch (error) {
         console.log(error);

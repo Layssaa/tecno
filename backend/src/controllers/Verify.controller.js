@@ -1,4 +1,4 @@
-const { doVerifyService } = require("../services/VeridyService");
+const { doVerifyService } = require("../services/VeridyService.service");
 
 const doVerify = async (req, res) => {
 

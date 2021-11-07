@@ -1,8 +1,8 @@
 const fs = require('fs');
-const { AuthenticUserBcrypt, EncryptUserDataBcrypt } = require("../middleware/EncryptUser");
-const readTheFile = require("./readFile");
+const { AuthenticUserBcrypt, EncryptUserDataBcrypt } = require("../middleware/EncryptUser.middleware");
+const readTheFile = require("./readFile.service");
 
-const LoginUserService = async (user, cookie, validation) => {
+const LoginAdmService = async (user, cookie, validation) => {
     const token = new Date().getTime();
     let session = {};
     let data;
@@ -10,12 +10,12 @@ const LoginUserService = async (user, cookie, validation) => {
     console.log(user);
     console.log("================================");
     try {
-        const response = await readTheFile("./src/database/User.json");
+        const response = await readTheFile("./src/database/Adm.json");
 
         console.log("=======RESPONSE=======");
         console.log(response);
 
-        userVerify = await response.find(element => element.email == user.email);
+        userVerify = await response.find(element => element.email === user.email);
         console.log('--------------VERIFY-----------------');
         console.log(userVerify);
 
@@ -30,6 +30,7 @@ const LoginUserService = async (user, cookie, validation) => {
         }
 
         let eventsList = await readTheFile("./src/database/Events.json");
+        eventsList = await eventsList.filter(element => element.hash == userVerify.hash);
 
         data = {
             hash: userVerify.hash,
@@ -47,7 +48,7 @@ const LoginUserService = async (user, cookie, validation) => {
 
         session = {
             token: sessionHash.hash,
-            hash:userVerify.hash,
+            hash: userVerify.hash,
             user_id: userVerify.id,
             creat_At: token,
             experies_In: experies_In
@@ -56,8 +57,8 @@ const LoginUserService = async (user, cookie, validation) => {
         // ---------------- New Lists ----------------
         let newListSession = sessionsList.concat(session);
 
-        console.log('--------------NEW LIST-----------------');
-        console.log(newListSession);
+        console.log('--------------SESSION-----------------');
+        console.log(session);
 
 
         fs.writeFile("./src/database/Session.json", `${JSON.stringify(newListSession)}`, () => {
@@ -73,4 +74,4 @@ const LoginUserService = async (user, cookie, validation) => {
     return { session, data }
 }
 
-module.exports = { LoginUserService };
+module.exports = { LoginAdmService };

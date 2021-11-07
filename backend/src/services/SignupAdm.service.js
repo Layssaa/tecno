@@ -1,20 +1,19 @@
 const fs = require('fs');
 const { EncryptUserDataBcrypt } = require("../middleware/EncryptUser.middleware");
-const readTheFile = require("./readFile.services");
+const readTheFile = require("./readFile.service");
 
 
-const signupUSERservice = async (user) => {
+const signupADMService = async (user) => {
     const token = new Date().getTime();
     let session = {};
-    let userToSend= {};
 
     try {
-        const response = await readTheFile("./src/database/User.json");
+        const response = await readTheFile("./src/database/Adm.json");
 
         console.log("=======RESPONSE=======");
         console.log(response);
 
-        userVerify = await response.find(element => element.email == user.email || element.username == user.username);
+        userVerify = await response.find(element => element.email == user.email);
         console.log('--------------VERIFY-----------------');
         console.log(userVerify);
 
@@ -23,22 +22,20 @@ const signupUSERservice = async (user) => {
         }
 
         const { hash } = await EncryptUserDataBcrypt(user.password, user.email);
-        const ID = response.length + 1;
+        const ID = response.length + 1
 
         //  ---------------- USER --------------------
         userToSend = {
             id: ID,
             hash: hash,
-            fullname: user.fullname,
-            username: user.username,
-            email: user.email
+            ...user
         }
 
         //  ---------------- SESSION -----------------
         const sessionHash = await EncryptUserDataBcrypt(token, user.email);
         const experies_In = token + 600000;
 
-        const sessionsList = await readTheFile("./src/database/Session.json");
+        const sessionsList = await readTheFile("./src/database/Session.json")
 
         session = {
             token: sessionHash.hash,
@@ -51,13 +48,13 @@ const signupUSERservice = async (user) => {
         console.log(userToSend);
 
         // ---------------- New Lists ----------------
-        let userList = await response.concat(userToSend);
+        let admList = await response.concat(userToSend);
         let newListSession = sessionsList.concat(session);
 
         console.log('--------------NEW LIST-----------------');
-        console.log(userList);
+        console.log(admList);
 
-        fs.writeFile("./src/database/User.json", `${JSON.stringify(userList)}`, () => {
+        fs.writeFile("./src/database/Adm.json", `${JSON.stringify(admList)}`, () => {
             console.log("Cadastrado!");
         });
 
@@ -76,4 +73,4 @@ const signupUSERservice = async (user) => {
     return { session }
 }
 
-module.exports = { signupUSERservice };
+module.exports = { signupADMService };

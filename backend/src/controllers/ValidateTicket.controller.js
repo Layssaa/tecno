@@ -1,4 +1,4 @@
-const { ValidateTicketService } = require("../services/ValidateTicket");
+const { ValidateTicketService } = require("../services/ValidateTicket.service");
 
 const ValidateTicket = async (req, res) => {
     console.log("REQ WITH QRCODE");

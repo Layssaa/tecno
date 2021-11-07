@@ -1,5 +1,5 @@
 const { element } = require("prop-types");
-const readTheFile = require("./readFile");
+const readTheFile = require("./readFile.service");
 
 const ValidateTicketService = async (hash, eventId) => {
 

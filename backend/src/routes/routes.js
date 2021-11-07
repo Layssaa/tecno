@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
-const { doLogout } = require('../controllers/Logout');
-const { doVerify } = require('../controllers/Verify');
+const { doLogout } = require('../controllers/Logout.controller');
+const { doVerify } = require('../controllers/Verify.controller');
 
 // rotas de uso comum aos dois tipos de usuário
 // adicionada funções de logout
