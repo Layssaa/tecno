@@ -26,7 +26,6 @@ const LoginAdm = async (req, res) => {
         !cookies.user ? console.log("Cookie vai ser mandado") : console.log("Cookie já existe, Não faça nada");
 
         !cookies.user ? res.cookie("user", session.token, {
-            maxAge: 600000,
             secure: true,
             httpOnly: true,
             sameSite: 'none'
