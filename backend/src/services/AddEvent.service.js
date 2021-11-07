@@ -18,7 +18,10 @@ const AddEventService_USER = async (idEvent, hash) => {
         console.log("======= SESSION ABERTA ENCONTRADA ======");
         console.log(sessionList);
 
-        userVerify = await userList.find(element => element.hash == sessionList.hash);
+        console.log("======= USER LIST ======");
+        console.log(userList);
+
+        userVerify = await userList.find(element => element.id == sessionList.user_id);
         console.log("============ USER LIST =============");
         console.log(idEvent);
         
@@ -40,8 +43,12 @@ const AddEventService_USER = async (idEvent, hash) => {
                 element.qrcodes.push(event.hash);
             }
         })
-        userVerify = await userList.find(element => element.hash == sessionList.hash);
+        userVerify = await userList.find(element => element.id == sessionList.user_id);
 
+        userVerify.qrcodes.push(event)
+
+        console.log('============= USUÁRIO REENCONTRADO A PARTIR DA SESSION');
+        console.log(userVerify);
         data = {
             hash: userVerify.hash,
             event: event,
