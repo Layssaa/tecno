@@ -23,7 +23,7 @@ const signupUSERservice = async (user) => {
         }
 
         const { hash } = await EncryptUserDataBcrypt(user.password, user.email);
-        const ID = response.length + 1;
+        const ID = response.length;
 
         //  ---------------- USER --------------------
         userToSend = {
