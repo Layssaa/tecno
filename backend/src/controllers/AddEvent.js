@@ -12,17 +12,21 @@ const AddEventUSER = async (req, res) => {
     const validation = await validationCookies(cookies);
 
     try {
-        const { data } = await AddEventService_USER(idEvent, cookies.user);
+        const { data, userVerify } = await AddEventService_USER(idEvent, cookies.user);
+        
         console.log(data.hash, data.event.id);
+        console.log(userVerify);
 
         const qrcodeImg = await MakeQrCode(data.hash, data.event.id);
         const qrCodeURL = {
             url: qrcodeImg
         }
+        
         console.log("Enviado storage");
         console.log(qrCodeURL);
-
+        
         res.send(qrcodeImg);
+
     }
     catch (error) {
         console.log(error);

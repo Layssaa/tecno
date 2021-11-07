@@ -5,11 +5,12 @@ const readTheFile = require("./readFile");
 const AddEventService_USER = async (idEvent, hash) => {
     let data;
     let userVerify = {};
+    let userList;
     console.log("============   HASH  ==============");
     console.log(hash);
     console.log("================================");
     try {
-        const userList = await readTheFile("./src/database/User.json");
+        userList = await readTheFile("./src/database/User.json");
         let sessionList = await readTheFile("./src/database/Session.json");
 
         sessionList = await sessionList.find(element => element.token == hash);
@@ -31,6 +32,12 @@ const AddEventService_USER = async (idEvent, hash) => {
 
         const event = eventsList.find(element => element.id === idEvent.id);
 
+        userList.forEach(element => {
+            if (element.hash == sessionList.hash) {
+                element.qrcodes.push(event.hash);
+            }
+        })
+        userVerify = await userList.find(element => element.hash == sessionList.hash);
 
         data = {
             hash: userVerify.hash,
@@ -49,13 +56,18 @@ const AddEventService_USER = async (idEvent, hash) => {
             console.log(eventsList);
         });
 
+        fs.writeFile("./src/database/user.json", `${JSON.stringify(userList)}`, () => {
+            console.log("==========Inscrito no evento!(User.json)=========");
+            console.log(userList);
+        })
+
     } catch (err) {
         console.log('DEU ERRO');
         console.log(err);
         return err
     }
 
-    return { data }
+    return { data, userVerify }
 }
 
 module.exports = { AddEventService_USER };
