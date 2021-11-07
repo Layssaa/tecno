@@ -31,7 +31,8 @@ const signupUSERservice = async (user) => {
             hash: hash,
             fullname: user.fullname,
             username: user.username,
-            email: user.email
+            email: user.email,
+            events: []
         }
 
         //  ---------------- SESSION -----------------

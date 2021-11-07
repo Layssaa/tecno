@@ -4,13 +4,15 @@
         "hash": "",
         "fullname": "",
         "username": "",
-        "email": ""
+        "email": "",
+        "events": []
     },
     {
         "id": 3,
         "hash": "$2b$10$YXGQ/D4rZV4PGzUms46t8eJzLudPD9wdGhscIrKhMA5ld1ArcA2YO",
         "fullname": "exemplo 1",
         "username": "exe1",
-        "email": "exemplo@exemplo"
+        "email": "exemplo@exemplo",
+        "events": []
     }
 ]
