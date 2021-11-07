@@ -1,0 +1,67 @@
+.header{
+    height: 100%;
+    width: 6vw;
+    background-color: #202020;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 1vw;
+}
+
+.profile-user{
+    width: 70%;
+    height: 8%;
+    margin-top: 4vh;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: #4E4E4E;
+    border: 1px solid #8850BF;
+}
+
+.profile{
+    width: 70%;
+    height: 8%;
+    margin-top: 4vh;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: #4E4E4E;
+    border: 1px solid #88BFB5;
+}
+
+.icon{
+    width: 2.5vw;
+    margin-top: 4vh;
+    cursor: pointer;
+}
+
+.icon:active, .icon:hover{
+    transform: scale(1.1);
+}
+
+.logo{
+    position: absolute;
+    left: 7vw;
+    top: 2vh;
+}
+
+.menu{
+    position: absolute;
+    width: 6vw;
+    height: 6vh;
+    top: 5vh;
+    left: 5.3vw;
+    z-index: 50;
+    background: #202020;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    border-radius: 0 2px 2px 0;
+    cursor: pointer;
+    transition: all 0.5s ease;
+
+}
+
+.menu:hover{
+    background:#2D2D2D;
+}

@@ -7,11 +7,12 @@ import loginUserClasses from "./LoginUser.module.css"
 
 import { useHistory } from "react-router-dom";
 import { useFormik } from 'formik';
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { MyContext } from "../../Context/Context";
+import { WallpaperImg } from "../../Components/Wallpaper/WallpaperStyle"
 
 export default function LoginUser() {
-    const { handleLoginUser } = useContext(MyContext)
+    const { handleLoginUser, verifyAuthentic } = useContext(MyContext)
     const history = useHistory();
 
     const changeUser = () => {
@@ -22,6 +23,8 @@ export default function LoginUser() {
         await handleLoginUser(values)
         history.push("/events-user");
     };
+    
+    useEffect(()=> verifyAuthentic(),[]);
 
     const formik = useFormik({
         initialValues: {
@@ -35,7 +38,9 @@ export default function LoginUser() {
     });
 
     return (
-        <div className="App">
+        <>
+        <WallpaperImg/>
+        <div className={classes.AppInitialsPages}>
             <img src={linePurple} alt="lines" className={loginUserClasses.loginUserClasses} />
 
             <div className={loginUserClasses.containerleft}>
@@ -79,5 +84,6 @@ export default function LoginUser() {
             </div>
 
         </div>
+        </>
     )
 }

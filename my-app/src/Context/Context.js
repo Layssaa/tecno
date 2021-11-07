@@ -1,27 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Login_ADM, RegisterEvent_ADM } from "../Services/Adm_request";
+import { Login_ADM, Logout_REQ, RegisterEvent_ADM, verifyAuthentic_REQ } from "../Services/Adm_request";
 import { AddEvent_USER, login_USER, SignUp_USER } from "../Services/User_request";
 
 
 export const MyContext = React.createContext({
-    id: null,
-    user: null,
-    moviesOnCart: [],
-    moviesOnWishList: [],
-    moviesOnHistory: []
 });
 
 export function MyProvider({ children }) {
     const [events, setEvents] = useState([]);
-    
+    const [authentic, setAuthentic] = useState(false);
 
     // ------------------------- Login -------------------------
     const handleLogin = async (values) => {
 
         const response = await Login_ADM(values);
-        console.log(response);
-        setEvents(response.events);
 
+        setEvents(response.events);
+        setAuthentic(true);
     }
 
     const handleLoginUser = async (values) => {
@@ -30,6 +25,15 @@ export function MyProvider({ children }) {
         console.log(response);
         setEvents(response.events);
 
+    }
+
+    const doLogout = async () => {
+        await Logout_REQ()
+    }
+
+    const verifyAuthentic =async () => {
+        const response =await verifyAuthentic_REQ();
+        console.log("verificando cookie");
     }
 
     // ------------------------- Logout -------------------------
@@ -73,9 +77,12 @@ export function MyProvider({ children }) {
         <MyContext.Provider
             value={{
                 user: null,
+                authentic,
 
                 handleLogin,
                 handleLoginUser,
+                doLogout,
+                verifyAuthentic,
 
                 handleSignUp,
                 handleRegisterEvent,

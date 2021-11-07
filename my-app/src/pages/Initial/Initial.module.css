@@ -4,6 +4,15 @@
     display: flex;
 }
 
+.AppInitialsPages{
+    width: 100%;
+    height: 100%;
+    display: flex;
+
+    position: absolute;
+    z-index: 10;
+}
+
 .lines{
     height: 96vh;
     position: absolute;
@@ -28,12 +37,12 @@
 
 .title{
     color: #FFFFFF;
-    font-size: 4em;
+    font-size: 4.8vw;
 }
 
 .subtitle {
     color: #E4E3E3;
-    font-size: 1.3em;
+    font-size: 1.8vw;
 }
 
 .title, .subtitle{
@@ -50,15 +59,17 @@
     background-color: #71aca1;
     width: 25vw;
     height: 8vh;
-    font-size: 1.5em;
+    font-size: 1.8vw;
     font-family: 'Lexend Mega', sans-serif;
     color: #ffff;
     border-radius: 4px;
     cursor: pointer;
+    transition: all 0.5s ease;
+
 }
 
 .btnjoin:hover, .btnLogin:hover{
-    background-color: #579186;
+    background-color: #56968a;
 }
 
 .btnjoin{

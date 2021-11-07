@@ -1,8 +1,11 @@
-import eventsUser from "../EventsTable/EventsUser.module.css"
+import eventsUser from "../EventsTable/EventsUser.module.css";
+import OnlyEventStyle from "./OnlyEvent.module.css";
 
 import { useHistory, useParams } from "react-router-dom";
 import { useContext, useEffect, useLayoutEffect, useState } from "react";
 import { MyContext } from "../../Context/Context";
+import Header from "../../Components/Header/Header";
+import SvgUserVR from "../../Components/SvgUserVR/UserVRSvg";
 
 export default function OnlyEvent() {
     const { events, handleAddEvent } = useContext(MyContext);
@@ -32,8 +35,32 @@ export default function OnlyEvent() {
 
     return (
         <div className="App">
+            <Header />
 
-            {!Qrcode ? null :
+            <div className={eventsUser.container} >
+
+                <div className={OnlyEventStyle.OnlyEventBox} >
+                    <div className={OnlyEventStyle.InfoBox}>
+                        <h1>Name event</h1>
+                        <span>00-00-00</span> <span>8h30</span>
+
+                        <p>
+                            LoREM LoREM LoREM LoREM LoREM LoREM LoREM LoREMLoREM LoREM LoREM LoREM LoREM LoREM LoREM LoREMLoREM LoREM LoREM LoREM LoREM LoREM LoREM LoREM
+                        </p>
+
+                        <span>R$00,00</span>
+                    </div>
+
+                    <button className={eventsUser.addEvent} onClick={() => addEvent(eventOnly.id)}>JOIN</button>
+
+                </div>
+
+            </div>
+
+            <SvgUserVR />
+
+
+            {/* {!Qrcode ? null :
                 <img src={Qrcode} width="80vw" height="100vh" />
             }
 
@@ -44,7 +71,7 @@ export default function OnlyEvent() {
                     </div>)
                 }
                 <button className={eventsUser.addEvent} onClick={() => addEvent(eventOnly.id)}>JOIN</button>
-            </div>
+            </div> */}
         </div>
     )
 }

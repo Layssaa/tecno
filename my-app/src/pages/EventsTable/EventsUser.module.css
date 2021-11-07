@@ -9,59 +9,138 @@
 }
 
 .container{
-    width: 100%;
+    width: 80%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
 }
+
 .list{
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-evenly;
+    align-items: flex-start;
+    justify-content: flex-start;
 
     width: 100%;
     height: 90vh;
+    margin-top: 15vh;
 
     gap:2vw;
+    overflow-y: scroll;
+}
+
+.list::-webkit-scrollbar {
+    width: 12px;              
+  }
+
+.list::-webkit-scrollbar-track {
+    background: none;    
+    border-radius: 20px;   
+    background-color: #0C0C0C;
+
+}
+
+.list::-webkit-scrollbar-thumb {
+    background-color: #202020;    
+    border-radius: 20px;      
+    border: 3px solid #0C0C0C;  
+
 }
 
 .listItem{
     display: flex;
-    align-items: center;
     justify-content: space-evenly;
     width: 55vw;
+    flex-wrap: nowrap;
 }
 
 .boxEvent{
+    position:relative;
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    
-    width: 40vw;
-    height: 12vh;
-    padding: auto 1vh;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+   
+    width: 15vw;
+    height: 35vh;
     background: #202020;
     box-shadow: 10px 10px 4px #0E0E0E;
-    border-radius: 8px;
+    border-radius: 0.5vw;
 
     text-align: center;
     cursor: pointer;
+    font-size: 1em;
+    gap: 0.5vw;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transition: all 0.5s ease;
 }
 
 .boxEvent:hover{
     background: #2D2D2D;
 }
 
+.boxEventFront{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.boxEventBack{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+
+}
+
+.boxImg{
+    width: 15vw;
+    height: 25vh;
+    border-radius: 6px;
+}
+
+.imgEvent{
+    width: 15vw;
+    height: 23vh;
+    margin-top: 0;
+    border-top-left-radius: 0.5vw;
+    border-top-right-radius: 0.5vw;
+}
+
+.EventTitle{
+    padding-left:0.5vw ;
+}
+
+.EventDate{
+    font-size: 0.95em;
+}
+.EventPrice{
+    font-size: 0.9em;
+    padding-bottom: 0.5vh;
+    padding-left:0.5vw ;
+
+}
+.date{
+    display: flex;
+    justify-self: flex-start; 
+     align-self: flex-start;
+}
+
 .addEvent{
-    width: 10vw;
-    height: 6vh;
+    width: 22vw;
+    height: 7.5vh;
 
     border: none;
     background: #8850BF;
-    border-radius: 6px;
+    border-radius: 0.3vw;
+    font-size: 1.6vw;
     cursor: pointer;
+    transition: all 0.5s ease;
+
 }
 
 .addEvent:hover{

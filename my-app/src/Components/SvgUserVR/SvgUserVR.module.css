@@ -1,0 +1,9 @@
+.imgVR {
+    align-self: flex-end;
+    width: 20vw;
+    right: 0vw;
+    bottom: 0vh;
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+

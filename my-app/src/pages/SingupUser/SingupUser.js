@@ -7,6 +7,7 @@ import { useFormik } from 'formik';
 import { useHistory } from "react-router-dom";
 import { useContext } from "react";
 import { MyContext } from "../../Context/Context";
+import { WallpaperImg } from "../../Components/Wallpaper/WallpaperStyle";
 
 export default function SingupUser() {
     const history = useHistory();
@@ -37,7 +38,9 @@ export default function SingupUser() {
     });
 
     return (
-        <div className="App">
+        <>
+          <WallpaperImg/>
+        <div className={classes.AppInitialsPages}>
             <img src={linePurple} alt="lines" className={loginUserClasses.loginUserClasses} />
 
             <div className={loginUserClasses.containerleft} >
@@ -109,5 +112,6 @@ export default function SingupUser() {
             </div>
 
         </div>
+        </>
     )
 }

@@ -4,11 +4,12 @@ import loginClasses from "./LoginAdm.module.css";
 import { useHistory } from "react-router-dom";
 import { useFormik } from 'formik';
 import { Login_ADM } from "../../Services/Adm_request";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { MyContext } from "../../Context/Context";
+import { WallpaperImg } from "../../Components/Wallpaper/WallpaperStyle";
 
 export default function LoginAdm() {
-    const { handleLogin } = useContext(MyContext);
+    const { handleLogin, verifyAuthentic } = useContext(MyContext);
     const history = useHistory();
 
     const changeUser = async () => {
@@ -19,6 +20,9 @@ export default function LoginAdm() {
         await handleLogin(values);
         history.push("/events-adm");
     };
+
+    useEffect(()=> verifyAuthentic(),[]);
+
 
     const formik = useFormik({
         initialValues: {
@@ -32,11 +36,12 @@ export default function LoginAdm() {
     });
 
     return (
-        <div className="App">
+        <>
+          <WallpaperImg/>
+        <div className={classes.AppInitialsPages}>
             <img src={linesaPNG} alt="lines" className={classes.lines} />
 
             <div className={classes.containerleft}>
-
                 <h1 className={classes.title}>TECNO</h1>
                 <p className={classes.subtitle}>make your event</p>
             </div>
@@ -77,5 +82,7 @@ export default function LoginAdm() {
             </div>
 
         </div>
+
+        </>
     )
 }

@@ -1,11 +1,13 @@
-import classes from "../Initial/Initial.module.css";
-import eventsClasses from "./Events.module.css";
 import eventsUser from "./EventsUser.module.css"
 
 import { useHistory } from "react-router-dom";
 import { useFormik } from 'formik';
 import { useContext, useLayoutEffect, useState } from "react";
 import { MyContext } from "../../Context/Context";
+import Header from "../../Components/Header/Header";
+import SvgUserVR from "../../Components/SvgUserVR/UserVRSvg";
+
+import imgEvent from "../../images/EventImgTest.jpg"
 
 export default function EventsUser() {
     const { events, handleAddEvent } = useContext(MyContext);
@@ -38,24 +40,99 @@ export default function EventsUser() {
 
     return (
         <div className="App">
-
+            <Header />
             {!Qrcode ? null :
                 <img src={Qrcode} width="80vw" height="100vh" />
             }
 
             <div className={eventsUser.container} >
-                <span className={eventsUser.titleEvents}>Events</span>
                 <div className={eventsUser.list}>
+                    <div className={eventsUser.boxEvent} >
+                        <div className={eventsUser.boxImg}>
+                            <img src={imgEvent} className={eventsUser.imgEvent} />
+                        </div>
+                        <span className={eventsUser.EventTitle}>Name Event</span><span className={eventsUser.EventDate}>00/00</span>
+                        <span className={eventsUser.EventPrice}>R$ 00,00</span>
+
+                    </div>
+                    <div className={eventsUser.boxEvent} >
+                        <div className={eventsUser.boxImg}>
+                            <img src={imgEvent} className={eventsUser.imgEvent} />
+                        </div>
+                        <span className={eventsUser.EventTitle}>Name Event</span><span className={eventsUser.EventDate}>00/00</span>
+                        <span className={eventsUser.EventPrice}>R$ 00,00</span>
+
+                    </div>
+                    <div className={eventsUser.boxEvent} >
+                        <div className={eventsUser.boxImg}>
+                            <img src={imgEvent} className={eventsUser.imgEvent} />
+                        </div>
+                        <span className={eventsUser.EventTitle}>Name Event</span><span className={eventsUser.EventDate}>00/00</span>
+                        <span className={eventsUser.EventPrice}>R$ 00,00</span>
+
+                    </div>
+                    <div className={eventsUser.boxEvent} >
+                        <div className={eventsUser.boxImg}>
+                            <img src={imgEvent} className={eventsUser.imgEvent} />
+                        </div>
+                        <span className={eventsUser.EventTitle}>Name Event</span><span className={eventsUser.EventDate}>00/00</span>
+                        <span className={eventsUser.EventPrice}>R$ 00,00</span>
+
+                    </div>
+                    <div className={eventsUser.boxEvent} >
+                        <div className={eventsUser.boxImg}>
+                            <img src={imgEvent} className={eventsUser.imgEvent} />
+                        </div>
+                        <span className={eventsUser.EventTitle}>Name Event</span><span className={eventsUser.EventDate}>00/00</span>
+                        <span className={eventsUser.EventPrice}>R$ 00,00</span>
+
+                    </div>
+                    <div className={eventsUser.boxEvent} >
+                        <div className={eventsUser.boxImg}>
+                            <img src={imgEvent} className={eventsUser.imgEvent} />
+                        </div>
+                        <span className={eventsUser.EventTitle}>Name Event</span><span className={eventsUser.EventDate}>00/00</span>
+                        <span className={eventsUser.EventPrice}>R$ 00,00</span>
+
+                    </div>
+                    <div className={eventsUser.boxEvent} >
+                        <div className={eventsUser.boxImg}>
+                            <img src={imgEvent} className={eventsUser.imgEvent} />
+                        </div>
+                        <span className={eventsUser.EventTitle}>Name Event</span><span className={eventsUser.EventDate}>00/00</span>
+                        <span className={eventsUser.EventPrice}>R$ 00,00</span>
+
+                    </div>
+                    <div className={eventsUser.boxEvent} >
+                        
+                        <div className={eventsUser.boxEventFront} >
+                            <div className={eventsUser.boxImg}>
+                                <img src={imgEvent} className={eventsUser.imgEvent} />
+                            </div>
+                            <span className={eventsUser.EventTitle}>Name Event</span><span className={eventsUser.EventDate}>00/00</span>
+                            <span className={eventsUser.EventPrice}>R$ 00,00</span>
+                        </div>
+
+
+                        <div className={eventsUser.boxEventBack} >
+                            <p>loreroekroeoesro sfjkds skjdnfkjdfn sfdhds</p>
+                        </div>
+
+                    </div>
+
+
                     {!events ? <p>vazio</p> :
                         events.map((element, index) => {
                             console.log(element.id);
                             return (
-                                <div className={eventsUser.listItem} key={index}>
-                                    <div className={eventsUser.boxEvent} onClick={() => goToEvent(element.id)}>
-                                        <p>{element.title} - {element.units} - {element.time}</p>
+                                <div className={eventsUser.boxEvent} onClick={() => goToEvent(element.id)}>
+                                    <div className={eventsUser.boxImg}>
+                                        <img src={imgEvent} className={eventsUser.imgEvent} />
                                     </div>
-                                    {/* <button className={eventsUser.addEvent} onClick={() => addEvent(element.id)}>JOIN</button> */}
-                                </div>)
+                                    <span className={eventsUser.EventTitle}>{element.title}</span><span className={eventsUser.EventDate}>{element.date}</span>
+                                    <span className={eventsUser.EventPrice}>R${element.price},00</span>
+                                </div>
+                            )
                         })}
 
                 </div>
@@ -63,6 +140,7 @@ export default function EventsUser() {
 
             </div>
 
+            <SvgUserVR />
         </div>
     )
 }

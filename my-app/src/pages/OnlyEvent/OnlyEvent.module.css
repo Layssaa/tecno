@@ -1,0 +1,28 @@
+.OnlyEventBox{
+    width: 50vw;
+    height: 80vh;
+
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    align-self: flex-start;
+
+    border-radius: 0.4vw;
+    background-color: #202020;
+    box-shadow: 10px 10px 4px #0E0E0E;
+    margin-top: 9vh;
+
+}
+
+.InfoBox{
+    width: 50vw;
+    height: 65vh;
+
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-evenly;
+
+    padding-left: 1vw;
+}

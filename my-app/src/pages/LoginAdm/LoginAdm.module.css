@@ -26,11 +26,13 @@
 }
 
 .requests::placeholder{
+    font-size: 1.1vw;
     padding-left: 1vw;
 }
 
 .btnChangeUser{
-    cursor: pointer;
+    cursor: pointer;  
+    font-size: 1.3vw;
 }
 
 .btnChangeUser:hover{
@@ -43,9 +45,10 @@
     border: none;
     width: 25vw;
     height: 7vh;
-    font-size: 1.5em;
+    font-size: 1.8vw;
     cursor:pointer;
     border-radius: 3px;
+    transition: all 0.5s ease;
 
 }
 
@@ -55,6 +58,6 @@
 
 .toLabel {
     align-self: flex-start;
-    font-size: 1.3em;
+    font-size: 1.3vw;
     margin-bottom: 1vh;
 }
