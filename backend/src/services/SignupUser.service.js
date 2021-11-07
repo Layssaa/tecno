@@ -6,7 +6,7 @@ const readTheFile = require("./readFile.service");
 const signupUSERservice = async (user) => {
     const token = new Date().getTime();
     let session = {};
-        let userToSend= {}
+    let userToSend= {};
 
     try {
         const response = await readTheFile("./src/database/User.json");
@@ -32,7 +32,7 @@ const signupUSERservice = async (user) => {
             fullname: user.fullname,
             username: user.username,
             email: user.email,
-            events: []
+            qrcodes: [""]
         }
 
         //  ---------------- SESSION -----------------
@@ -58,8 +58,10 @@ const signupUSERservice = async (user) => {
         console.log('--------------NEW LIST-----------------');
         console.log(userList);
 
+        console.log(JSON.stringify(userList));
+
         fs.writeFile("./src/database/User.json", `${JSON.stringify(userList)}`, () => {
-            console.log("Cadastrado!");
+            console.log("User Cadastrado!");
         });
 
         fs.writeFile("./src/database/Session.json", `${JSON.stringify(newListSession)}`, () => {

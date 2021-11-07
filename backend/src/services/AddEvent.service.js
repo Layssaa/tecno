@@ -19,6 +19,9 @@ const AddEventService_USER = async (idEvent, hash) => {
         console.log(sessionList);
 
         userVerify = await userList.find(element => element.hash == sessionList.hash);
+        console.log("============ USER LIST =============");
+        console.log(idEvent);
+        
         console.log('============= USUÁRIO ENCONTRADO A PARTIR DA SESSION');
         console.log(userVerify);
 
@@ -56,7 +59,7 @@ const AddEventService_USER = async (idEvent, hash) => {
             console.log(eventsList);
         });
 
-        fs.writeFile("./src/database/user.json", `${JSON.stringify(userList)}`, () => {
+        fs.writeFile("./src/database/User.json", `${JSON.stringify(userList)}`, () => {
             console.log("==========Inscrito no evento!(User.json)=========");
             console.log(userList);
         })
