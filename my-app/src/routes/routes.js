@@ -12,56 +12,48 @@ export const routers = [
         name: "events",
         Component: OnlyEvent,
         path: "/events/:id",
-        isVisible: false,
-        isPrivate: false
+        isPrivate: true
     },
     {
         name: "events",
         Component: EventsUser,
         path: "/events-user",
-        isVisible: false,
-        isPrivate: false
+        isPrivate: true
     },
     {
         name: "events",
         Component: Events,
         path: "/events-adm",
-        isVisible: false,
-        isPrivate: false
+        isPrivate: true
     },
     {
         name: "login-user",
         Component: LoginUser,
         path: "/login-user",
-        isVisible: false,
         isPrivate: false
     },
     {
         name: "login-adm",
         Component: LoginAdm,
         path: "/login-adm",
-        isVisible: false,
         isPrivate: false
     },
     {
         name: "singup-user",
         Component: SingupUser,
         path: "/singup-user",
-        isVisible: false,
         isPrivate: false
     },
     {
         name: "singup-user",
         Component: SingupAdm,
         path: "/singup-adm",
-        isVisible: false,
         isPrivate: false
     },
     {
         name: "initial",
         Component: Initial,
         path: "/",
-        isVisible: false,
         isPrivate: false
 
     }

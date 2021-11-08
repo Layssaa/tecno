@@ -37,7 +37,6 @@ export default function Events() {
             time: '',
             units: '',
         },
-        validationSchema: Schema,
         onSubmit: (values) => {
             if (values.title == '' || values.units == '' || values.time == '' || values.date == '' || values.description == '') {
                 throw new Error("Insira todos os dados")
@@ -56,7 +55,7 @@ export default function Events() {
             <div className={eventsClasses.containerleft}>
 
 
-                <form className={eventsClasses.form} onSubmit={formik.handleSubmit} validationSchema={Schema}>
+                <form className={eventsClasses.form} onSubmit={formik.handleSubmit} >
                     <p className={eventsClasses.subtitle} >Register new event </p>
 
                     <label htmlFor="event" className={eventsClasses.toLabel}>Event</label>

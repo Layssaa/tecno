@@ -7,11 +7,12 @@ import loginUserClasses from "./LoginUser.module.css"
 
 import { useHistory } from "react-router-dom";
 import { useFormik } from 'formik';
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { MyContext } from "../../Context/Context";
 import { WallpaperImg } from "../../Components/Wallpaper/WallpaperStyle"
 
 export default function LoginUser() {
+    const [validateDate, setValidateDate] = useState();
     const { handleLoginUser, verifyAuthentic } = useContext(MyContext)
     const history = useHistory();
 
@@ -20,11 +21,13 @@ export default function LoginUser() {
     };
 
     const doLogin = async (values) => {
-        await handleLoginUser(values)
-        history.push("/events-user");
+        setValidateDate(await handleLoginUser(values));
+        if (validateDate) {
+            history.push("/events-user");
+        }
     };
-    
-    useEffect(()=> verifyAuthentic(),[]);
+
+    useEffect(() => verifyAuthentic(), []);
 
     const formik = useFormik({
         initialValues: {
@@ -39,51 +42,52 @@ export default function LoginUser() {
 
     return (
         <>
-        <WallpaperImg/>
-        <div className={classes.AppInitialsPages}>
-            <img src={linePurple} alt="lines" className={loginUserClasses.loginUserClasses} />
+            <WallpaperImg />
+            <div className={classes.AppInitialsPages}>
+                <img src={linePurple} alt="lines" className={loginUserClasses.loginUserClasses} />
 
-            <div className={loginUserClasses.containerleft}>
-                <form className={loginClasses.form} onSubmit={formik.handleSubmit}>
-                    <div>
-                        <label htmlFor="email" className={loginClassesAdm.toLabel}>Email</label>
-                        <input
-                            id="email"
-                            className={loginClassesAdm.requests}
-                            placeholder="Email"
-                            name="email"
-                            type="text"
-                            onChange={formik.handleChange}
-                            value={formik.values.email}
-                        />
-                    </div>
+                <div className={loginUserClasses.containerleft}>
+                    <form className={loginClasses.form} onSubmit={formik.handleSubmit}>
+                        <div>
+                            <label htmlFor="email" className={loginClassesAdm.toLabel}>Email</label>
+                            <input
+                                id="email"
+                                className={loginClassesAdm.requests}
+                                placeholder="Email"
+                                name="email"
+                                type="text"
+                                onChange={formik.handleChange}
+                                value={formik.values.email}
+                            />
+                        </div>
 
-                    <div>
-                        <label htmlFor="password" className={loginClassesAdm.toLabel}>Password</label>
-                        <input
-                            id="password"
-                            className={loginClassesAdm.requests}
-                            placeholder="password"
-                            name="password"
-                            type="password"
-                            onChange={formik.handleChange}
-                            value={formik.values.password}
-                        />
+                        <div>
+                            <label htmlFor="password" className={loginClassesAdm.toLabel}>Password</label>
+                            <input
+                                id="password"
+                                className={loginClassesAdm.requests}
+                                placeholder="password"
+                                name="password"
+                                type="password"
+                                onChange={formik.handleChange}
+                                value={formik.values.password}
+                            />
 
-                    </div>
-                    <span className={loginUserClasses.btnChangeUser} onClick={changeUser}>I'm ADM</span>
-                    <button type="submit" className={loginUserClasses.btnsingup}>LOGIN</button>
+                        </div>
+                        <span className={loginUserClasses.btnChangeUser} onClick={changeUser}>I'm ADM</span>
+                        {validateDate === false ? <p className={loginClassesAdm.errorMessage}>Dados inválidos</p> : null}
 
-                </form>
+                        <button type="submit" className={loginUserClasses.btnsingup}>LOGIN</button>
+
+                    </form>
+                </div>
+
+                <div className={classes.containerright} >
+                    <h1 className={classes.title}>TECNO</h1>
+                    <p className={classes.subtitle}>join an event</p>
+                </div>
 
             </div>
-
-            <div className={classes.containerright} >
-                <h1 className={classes.title}>TECNO</h1>
-                <p className={classes.subtitle}>join an event</p>
-            </div>
-
-        </div>
         </>
     )
 }

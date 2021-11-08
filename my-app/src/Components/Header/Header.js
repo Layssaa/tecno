@@ -13,12 +13,17 @@ export default function Header(props) {
     const history = useHistory();
     const { doLogout } = useContext(MyContext);
 
-    const openWindows = ()=>{
-        open? setOpen(false):setOpen(true);
+    const openWindows = () => {
+        open ? setOpen(false) : setOpen(true);
     }
 
-    const goEvents = async (values) => {
-        history.push("/events-user")
+    const goInitialPage = (values) => {
+        history.push("/")
+    }
+
+    const Logout = async () => {
+        await doLogout()
+        goInitialPage()
     }
 
     return (
@@ -26,8 +31,8 @@ export default function Header(props) {
             <div className={headerStyle.header}>
 
                 <div src={profile} className={headerStyle.profile} onClick={openWindows}></div>
-                
-                {open? <div onClick={openWindows} className={headerStyle.menu}><span onClick={doLogout}>QUIT</span></div>: null}
+
+                {open ? <div onClick={openWindows} className={headerStyle.menu}><span onClick={Logout}>QUIT</span></div> : null}
                 <img src={homeIcon} className={headerStyle.icon} />
                 <img src={ticketIcon} className={headerStyle.icon} />
 

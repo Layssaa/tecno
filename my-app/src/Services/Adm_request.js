@@ -1,15 +1,28 @@
 import api from "./api"
 
 export const Login_ADM = async (user) => {
-    console.log(user);
-    const response = await api.post("/admin/login", user, { withCredentials: true });
-    return response.data;
+    try {
+        const { data } = await api.post("/admin/login", user, { withCredentials: true });
+        const authentic = true;
+        return { data, authentic };
+    } catch (error) {
+        const authentic = false;
+        return { authentic }
+    }
 };
 
 export const SignUp_ADM = async (user) => {
-    const response = await api.post("/admin/signup", user, { withCredentials: true });
-    console.log(response.data);
-    return response.data;
+    try {
+        const { data } = await api.post("/admin/signup", user, { withCredentials: true });
+        const authentic = true;
+        console.log("============ SIGN UP =============");
+        return { authentic };
+
+    } catch (error) {
+        const authentic = false;
+        return { authentic }
+    }
+
 };
 
 export const RegisterEvent_ADM = async (event) => {
@@ -20,12 +33,20 @@ export const RegisterEvent_ADM = async (event) => {
 };
 
 export const Logout_REQ = async () => {
-    await api.get("/logout", { withCredentials: true });
+    const response = await api.get("/logout", { withCredentials: true });
+    console.log("==========REQ LOGOUT==========");
+    console.log(response);
     return
 }
 
 export const verifyAuthentic_REQ = async () => {
-    const response = await api.get("/verify", { withCredentials: true });
-    console.log(response);
-    return response.data
+    try {
+        const { data } = await api.get("/verify", { withCredentials: true });
+        const authenticed = true;
+        return { authenticed }
+    } catch (error) {
+        const authenticed = false;
+        return { authenticed }
+    }
+
 }

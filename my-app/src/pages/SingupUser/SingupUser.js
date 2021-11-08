@@ -5,11 +5,12 @@ import loginUserClasses from "./SingupUser.module.css"
 
 import { useFormik } from 'formik';
 import { useHistory } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { MyContext } from "../../Context/Context";
 import { WallpaperImg } from "../../Components/Wallpaper/WallpaperStyle";
 
 export default function SingupUser() {
+    const [msgError, SetMsgError] = useState('');
     const history = useHistory();
     const { handleSignupUser } = useContext(MyContext);
 
@@ -31,8 +32,15 @@ export default function SingupUser() {
             repeatpassword: '',
         },
         onSubmit: values => {
+            if (values.fullname === '' || values.repeatpassword === '' || values.password === '' || values.email === '' || values.username === '') {
+                return SetMsgError("Insira todos os dados.")
+            }
+
+            if (values.repeatpassword !== values.password) {
+                return SetMsgError("As senhas são diferentes.")
+            }
+
             alert(JSON.stringify(values, null, 2));
-            if (values.password !== values.repeatpassword) { return }
             goEvents(values);
         },
     });
@@ -102,6 +110,7 @@ export default function SingupUser() {
                     />
 
                     <span className={loginUserClasses.btnChangeUser} onClick={changeUser}>I'm Adm</span >
+                    <span>{msgError}</span>
                     <button type="submit" className={loginUserClasses.btnsingup}>JOIN</button>
                 </form>
             </div>

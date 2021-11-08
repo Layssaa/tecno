@@ -4,19 +4,26 @@ import loginClasses from "./SingupAdm.module.css"
 
 import { useHistory } from "react-router-dom";
 import { useFormik } from 'formik';
-import { SignUp_ADM } from "../../Services/Adm_request";
 import { WallpaperImg } from "../../Components/Wallpaper/WallpaperStyle";
+import { useContext, useState } from "react";
+import { MyContext } from "../../Context/Context";
 
 export default function SingupAdm() {
+    const [validateDate, setValidateDate] = useState();
+    const [msgError, SetMsgError] = useState('');
+
     const history = useHistory();
+    const { handleSignUpAdm } = useContext(MyContext)
 
     const changeUser = () => {
         history.push("/singup-user")
     }
 
     const goEvents = async (values) => {
-        const response = await SignUp_ADM(values)
-        history.push("/events-adm")
+        setValidateDate(await handleSignUpAdm(values));
+        if (validateDate) {
+            history.push("/events-adm")
+        }
     }
 
     const formik = useFormik({
@@ -28,6 +35,14 @@ export default function SingupAdm() {
             repeatpassword: '',
         },
         onSubmit: values => {
+            if (values.fullname === '' || values.repeatpassword === '' || values.password === '' || values.email === '' || values.username === '') {
+                return SetMsgError("Insira todos os dados.");
+            }
+
+            if (values.repeatpassword !== values.password) {
+                return SetMsgError("As senhas são diferentes.");
+            }
+            SetMsgError("")
             alert(JSON.stringify(values, null, 2));
             goEvents(values);
         },
@@ -103,9 +118,13 @@ export default function SingupAdm() {
                         />
 
                         <span className={loginClasses.btnChangeUser} onClick={changeUser}>I'm USER</span >
+                        <span>{msgError}</span>
                         <button type="submit" className={loginClasses.btnsingup}>JOIN</button>
 
                     </form>
+                    
+                    {validateDate === false ? <p className={loginClasses.errorMessage}>Não foi possível realizar o cadastro.</p> : null}
+
 
                 </div>
 
