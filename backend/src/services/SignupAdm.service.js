@@ -28,6 +28,7 @@ const signupADMService = async (user) => {
         userToSend = {
             id: ID,
             hash: hash,
+            type:"admin",
             ...user
         }
 

@@ -32,6 +32,7 @@ const signupUSERservice = async (user) => {
             fullname: user.fullname,
             username: user.username,
             email: user.email,
+            type: "user",
             qrcodes: []
         }
 
