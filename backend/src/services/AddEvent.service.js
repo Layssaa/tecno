@@ -6,57 +6,36 @@ const AddEventService_USER = async (idEvent, hash) => {
     let data;
     let userVerify = {};
     let userList;
-    console.log("============   HASH  ==============");
+
+    console.log("AQUI");
+    console.log(idEvent);
     console.log(hash);
-    console.log("================================");
+
     try {
         userList = await readTheFile("./src/database/User.json");
         let sessionList = await readTheFile("./src/database/Session.json");
 
         sessionList = await sessionList.find(element => element.token == hash);
 
-        console.log("======= SESSION ABERTA ENCONTRADA ======");
-        console.log(sessionList);
-
-        console.log("======= USER LIST ======");
-        console.log(userList);
-
         userVerify = await userList.find(element => element.id == sessionList.user_id);
-        console.log("============ USER LIST =============");
-        console.log(idEvent);
-        
-        console.log('============= USUÁRIO ENCONTRADO A PARTIR DA SESSION');
-        console.log(userVerify);
 
         if (userVerify == undefined) {
             throw new Error("User not found!");
         }
 
         const eventsList = await readTheFile("./src/database/Events.json");
-        console.log("============ ID EVENT =============");
-        console.log(idEvent);
 
         const event = eventsList.find(element => element.id === idEvent.id);
 
-        userList.forEach(element => {
-            if (element.hash == sessionList.hash) {
-                element.qrcodes.push(event.hash);
-            }
-        })
         userVerify = await userList.find(element => element.id == sessionList.user_id);
 
         userVerify.qrcodes.push(event)
 
-        console.log('============= USUÁRIO REENCONTRADO A PARTIR DA SESSION');
-        console.log(userVerify);
         data = {
             hash: userVerify.hash,
             event: event,
             delete: false
         };
-
-        console.log("===========DATA EVENT============");
-        console.log(data);
 
         let userEventsList = await readTheFile("./src/database/UserEvents.json");
         userEventsList = await userEventsList.concat(data);
@@ -72,7 +51,7 @@ const AddEventService_USER = async (idEvent, hash) => {
         })
 
     } catch (err) {
-        console.log('DEU ERRO');
+        console.log('DEU ERRO ==== Add Event Service');
         console.log(err);
         return err
     }

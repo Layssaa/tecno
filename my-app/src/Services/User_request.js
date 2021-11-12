@@ -28,7 +28,9 @@ export const SignUp_USER = async (_user) => {
 
 export const AddEvent_USER = async (_event) => {
     const event = { id: _event }
+    console.log("FAZENDO REQ")
     const response = await api.post("/user/addEvent", event);
+    console.log("RESPOSTA");
     console.log(response.data);
     return response.data;
 }

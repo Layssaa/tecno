@@ -3,7 +3,6 @@ const { doVerifyService } = require("../services/VeridyService.service");
 const doVerify = async (req, res) => {
 
     const { cookies } = req;
-    console.log("VERIFY COOKIE");
 
     try {
         const response = await doVerifyService(cookies);

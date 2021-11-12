@@ -1,3 +1,4 @@
+const { CreateToken } = require("../middleware/MakeJWT");
 const { LoginAdmService } = require("../services/LoginAdm.service");
 const readTheFile = require("../services/readFile.service");
 
@@ -6,26 +7,16 @@ const LoginAdm = async (req, res) => {
     const user = req.body;
     const { cookies } = req;
 
-    console.log("USER RECEBIDO NA REQUISITION");
-    console.log(user);
-
     const validation = await validationCookies(cookies);
-    console.log("teste de cookies ");
-    console.log(validation);
 
     try {
-        console.log('========requisition============');
         const { data, session } = await LoginAdmService(user, cookies.user, validation);
-        
-        console.log("Enviado ao cookie");
-        console.log(session);
+        const { token } = await CreateToken(session.token);
 
-        console.log("Enviado storage");
-        console.log(data);
+        console.log("============TOKEN SEND==============");
+        console.log(token);
 
-        !cookies.user ? console.log("Cookie vai ser mandado") : console.log("Cookie já existe, Não faça nada");
-
-        !cookies.user ? res.cookie("user", session.token, {
+        !cookies.token ? res.cookie("token", token, {
             secure: true,
             httpOnly: true,
             sameSite: 'none'
@@ -34,7 +25,6 @@ const LoginAdm = async (req, res) => {
         res.send(data);
     }
     catch (error) {
-        console.log(error);
         return res.status(403).json({ "msg": "Usuário não encontrado" })
     }
 };

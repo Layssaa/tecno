@@ -17,13 +17,19 @@ export default function Header(props) {
         open ? setOpen(false) : setOpen(true);
     }
 
-    const goInitialPage = (values) => {
+    const goBackHome = (values) => {
+        history.push("/events-user")
+    }
+
+    const goHistory = (values) => {
         history.push("/")
     }
 
     const Logout = async () => {
         await doLogout()
-        goInitialPage()
+        history.push("/")
+
+
     }
 
     return (

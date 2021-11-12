@@ -3,11 +3,18 @@ const { doLogoutService } = require("../services/LogoutService.service");
 const doLogout = async (req, res) => {
 
     const { cookies } = req;
-    console.log("DELETE COOKIE");
 
     try {
         await doLogoutService(cookies);
-        res.clearCookie("user");
+        res.clearCookie("user", {
+            domain: "127.0.0.1",
+            path: "/",
+            secure: true,
+            httpOnly: true,
+            sameSite: 'none'
+        }).send()
+        console.log('enviado');
+
     }
     catch (error) {
         console.log(error);

@@ -80,7 +80,7 @@ export default function LoginAdm() {
                         <span className={loginClasses.btnChangeUser} onClick={changeUser}>I'm USER</span>
 
                         {validateDate === false ? <p className={loginClasses.errorMessage}>Dados inválidos</p> : null}
-                        <button type="submit" className={loginClasses.btnsingup}>LOGIN</button>
+                        <button type="submit" className={loginClasses.btnlogin}>LOGIN</button>
 
                     </form>
 

@@ -1,5 +1,4 @@
 // ADICIONADO CONDIÇÃO PARA EVITAR QUE DOIS EVENTOS TENHAM O MESMO NOME
-
 const fs = require('fs');
 const { element } = require('prop-types');
 const { AuthenticUserBcrypt, EncryptUserDataBcrypt } = require("../middleware/EncryptUser.middleware");
@@ -31,7 +30,7 @@ const RegisterEventService = async (event, hash) => {
             throw new Error("Event already exist. Please choose a different name.")
         }
 
-        const ID = eventsList.length;
+        const ID = eventsList.length + 1;
 
         const info = {
             id: ID,
@@ -45,15 +44,12 @@ const RegisterEventService = async (event, hash) => {
             events: eventsList
         }
 
-        console.log('--------------INFO TO SEND-----------------');
-        console.log(data);
-
         fs.writeFile("./src/database/Events.json", `${JSON.stringify(eventsList)}`, () => {
             console.log("Evento cadastrado!");
         });
 
     } catch (err) {
-        console.log('DEU ERRO');
+        console.log('DEU ERRO ===== Register Event');
         console.log(err);
         return err
     }

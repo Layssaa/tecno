@@ -82,3 +82,7 @@
 .addEvent:hover{
     background-color: #579186;
 }
+
+.ErrorMessage{
+        color: #FF665A;
+}

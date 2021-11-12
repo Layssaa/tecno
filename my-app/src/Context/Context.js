@@ -7,38 +7,57 @@ export const MyContext = React.createContext({
 });
 
 export function MyProvider({ children }) {
-    const [events, setEvents] = useState([]);
+    const [events, setEvents] = useState(JSON.parse(localStorage.getItem("events") || "[]"));
     const [authentic, setAuthentic] = useState(false);
+    const [authenticInLocalStorage, setAuthenticInLocalStorage] = useState(JSON.parse(localStorage.getItem("authentic") || false));
+
+    useEffect(() => {
+        localStorage.setItem("authentic", true);
+
+        console.log("Recebido da requisição")
+        console.log(authentic)
+
+        console.log("Pego do LocalStorage")
+        console.log(authenticInLocalStorage)
+
+    }, [authentic]);
+
+    useEffect(() => {
+        console.log("====== EVENTS INSERT =======");
+        console.log(events);
+
+        localStorage.setItem("events", JSON.stringify(events));
+    }, [events]);
 
     // ------------------------- Login -------------------------
     const handleLogin = async (values) => {
 
         const { data, authentic } = await Login_ADM(values);
 
-        console.log(data);
-        console.log(authentic);
         setAuthentic(authentic);
+        setEvents(data.events);
 
         return authentic
-        // setEvents(response.events);
-        // setAuthentic(true);
     }
 
     const handleLoginUser = async (values) => {
 
         const { data, authentic } = await login_USER(values);
-        console.log(data);
+        console.log("==========AUTHENTIC LOGIN USER==========");
+        console.log(authentic);
+
         if (authentic) {
+            // localStorage.setItem("events", events);
             setEvents(data.events);
             setAuthentic(authentic);
+            return { authentic }
         }
-
         return authentic
-
     }
 
     const doLogout = async () => {
-        await Logout_REQ()
+        await Logout_REQ();
+        setAuthentic(false);
     }
 
     const verifyAuthentic = async () => {
@@ -46,6 +65,7 @@ export function MyProvider({ children }) {
         console.log("verificando cookie");
         console.log(authenticed);
         setAuthentic(authenticed);
+        return
     }
 
     // ------------------------- Logout -------------------------
@@ -102,6 +122,7 @@ export function MyProvider({ children }) {
             value={{
                 user: null,
                 authentic,
+                authenticInLocalStorage,
 
                 handleLogin,
                 handleLoginUser,

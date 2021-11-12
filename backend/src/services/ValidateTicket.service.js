@@ -20,10 +20,6 @@ const ValidateTicketService = async (hash, eventId) => {
 
         const findTicket = await readTheFile("./src/database/UserEvents.json");
         const verifyTicket = await findTicket.find(element =>{
-            console.log("===================================================");
-            console.log(element.hash,hash, element.event.id, eventId);
-            console.log("===================================================");
-
             return element.hash === hash && element.event.id == eventId});
 
         if(!verifyTicket){

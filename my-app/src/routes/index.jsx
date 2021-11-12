@@ -5,16 +5,9 @@ import DashboardError from '../pages/Error/Erro';
 import { routers } from './routes';
 
 function CustomRoute(props) {
-    const { authentic } = useContext(MyContext);
+    const { authentic, authenticInLocalStorage } = useContext(MyContext);
 
-    // if (loading) {
-    //     return (
-    //         <Main>
-    //             <Logo src={gif} />
-    //         </Main>)
-    // };
-
-    if (props.isPrivate && !authentic) {
+    if (props.isPrivate && authenticInLocalStorage === false) {
         return <Redirect to="/" exact />;
     };
 

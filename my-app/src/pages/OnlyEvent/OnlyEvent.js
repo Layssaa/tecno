@@ -8,29 +8,49 @@ import Header from "../../Components/Header/Header";
 import SvgUserVR from "../../Components/SvgUserVR/UserVRSvg";
 
 export default function OnlyEvent() {
-    const { events, handleAddEvent } = useContext(MyContext);
+    const { events, handleAddEvent, verifyAuthentic } = useContext(MyContext);
     const [Qrcode, setQrCode] = useState();
-    const { id } = useParams();
     const [eventOnly, setEventOnly] = useState();
+    const { id } = useParams();
+
 
     const findElement = async (id) => {
+        console.log("---------- ID PARAMS ----------");
+        console.log(id);
         setEventOnly(await events.find(element => element.id == id));
+        console.log('=====EVENT======');
         console.log(eventOnly);
     }
+    useEffect(() => verifyAuthentic(), []);
 
     useEffect(() => {
         findElement(id)
     }, [])
 
     const history = useHistory();
-    const goToEvent = (id) => {
-        history.push(`/events/${id}`)
-    }
+
+    // Precisa do type do usuário
+    // const backHome = (id) => {
+    //     history.push(`/events/${id}`)
+    // }
 
     const addEvent = async (id) => {
-        console.log('FRONT-EVENTUSER');
-        console.log(id);
         setQrCode(await handleAddEvent(id));
+        console.log("QRCODE URL");
+        console.log(Qrcode);
+    }
+
+    if (!eventOnly) {
+        return (
+            <div className="App">
+                <Header />
+                <div className={eventsUser.container} >
+                    <p>Loading</p>
+                </div>
+                <SvgUserVR />
+
+            </div>
+        )
     }
 
     return (
@@ -41,14 +61,14 @@ export default function OnlyEvent() {
 
                 <div className={OnlyEventStyle.OnlyEventBox} >
                     <div className={OnlyEventStyle.InfoBox}>
-                        <h1>Name event</h1>
-                        <span>00-00-00</span> <span>8h30</span>
+                        <h1>{eventOnly.title}</h1>
+                        <span>{eventOnly.date}</span> <span>{eventOnly.time}</span>
 
                         <p>
-                            LoREM LoREM LoREM LoREM LoREM LoREM LoREM LoREMLoREM LoREM LoREM LoREM LoREM LoREM LoREM LoREMLoREM LoREM LoREM LoREM LoREM LoREM LoREM LoREM
+                            {eventOnly.description}
                         </p>
 
-                        <span>R$00,00</span>
+                        <span>R${eventOnly.units},00</span>
                     </div>
 
                     <button className={eventsUser.addEvent} onClick={() => addEvent(eventOnly.id)}>JOIN</button>
@@ -59,19 +79,21 @@ export default function OnlyEvent() {
 
             <SvgUserVR />
 
+            {!Qrcode ? null : (
+                <>
+                    <div className={OnlyEventStyle.qrcodemessage}>
+                        <p >Este é o seu QRcode,
+                            ele será usado para entrar no evento.</p>
+                        <p > Atenção: Só pode ser usado um vez.</p>
+                    </div>
 
-            {/* {!Qrcode ? null :
-                <img src={Qrcode} width="80vw" height="100vh" />
-            }
 
-            <div className={eventsUser.container} >
-                {!eventOnly ? <p></p> : (
-                    <div className={eventsUser.listItem} >
-                        <p>{eventOnly.title} - {eventOnly.units} - {eventOnly.time}</p>
-                    </div>)
-                }
-                <button className={eventsUser.addEvent} onClick={() => addEvent(eventOnly.id)}>JOIN</button>
-            </div> */}
+                    <img src={Qrcode} className={OnlyEventStyle.qrcode} />
+                </>
+            )}
+
+
+
         </div>
     )
 }

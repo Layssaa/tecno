@@ -22,6 +22,8 @@ export default function LoginUser() {
 
     const doLogin = async (values) => {
         setValidateDate(await handleLoginUser(values));
+        console.log("///////////////validate///////////////");
+        console.log(validateDate);
         if (validateDate) {
             history.push("/events-user");
         }

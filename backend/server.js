@@ -1,9 +1,14 @@
+// JWT - TOKEN
+require("dotenv").config();
+const jwt = require('jsonwebtoken');
+
 const express = require('express');
 const app = express();
 const cors = require('cors');
 const path = require('path');
 const morgan = require('morgan');
 const cookieparser = require("cookie-parser");
+
 const bcrypt = require('bcrypt');
 const qr = require("qrcode-generator");
 

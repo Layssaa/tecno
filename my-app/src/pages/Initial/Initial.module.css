@@ -69,9 +69,21 @@
 }
 
 .btnjoin:hover, .btnLogin:hover{
-    background-color: #56968a;
+    background: none;
+    border: 1px solid #71aca1;
 }
 
 .btnjoin{
   margin-top: 1vh;
 }
+
+.btnSpan{
+    transition: padding 2s;
+    padding: 0
+}
+
+/* FAZ ANIMAÇÃO NO BOTAO */
+/* .btnSpan:hover{
+    background: red;
+    padding: 1.5vh 8.6vw;
+} */

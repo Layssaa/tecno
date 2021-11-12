@@ -11,12 +11,7 @@ const signupUSERservice = async (user) => {
     try {
         const response = await readTheFile("./src/database/User.json");
 
-        console.log("=======RESPONSE=======");
-        console.log(response);
-
         userVerify = await response.find(element => element.email == user.email || element.username == user.username);
-        console.log('--------------VERIFY-----------------');
-        console.log(userVerify);
 
         if (userVerify !== undefined) {
             throw new Error("User Already Exist.");
@@ -49,17 +44,10 @@ const signupUSERservice = async (user) => {
             experies_In: experies_In
         }
 
-        console.log('--------------USER TO SEND-----------------');
-        console.log(userToSend);
-
         // ---------------- New Lists ----------------
         let userList = await response.concat(userToSend);
         let newListSession = sessionsList.concat(session);
 
-        console.log('--------------NEW LIST-----------------');
-        console.log(userList);
-
-        console.log(JSON.stringify(userList));
 
         fs.writeFile("./src/database/User.json", `${JSON.stringify(userList)}`, () => {
             console.log("User Cadastrado!");
@@ -72,7 +60,7 @@ const signupUSERservice = async (user) => {
 
 
     } catch (err) {
-        console.log('DEU ERRO');
+        console.log('DEU ERRO === Signup User');
         console.log(err);
         return err
     }

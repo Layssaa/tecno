@@ -34,7 +34,7 @@ export default function Initial() {
                 <div className={classes.containerright}>
 
                     <img src={DrawVR} alt="Draw Virtual Reallity" className={classes.drawVR} />
-                    <button type="button" className={classes.btnLogin} onClick={goLogin} >LOGIN</button>
+                    <button type="button" className={classes.btnLogin} onClick={goLogin}><span className={classes.btnSpan}>LOGIN</span></button>
                     <button type="button" className={classes.btnjoin} onClick={goSingup}>JOIN US</button>
 
                 </div>

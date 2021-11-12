@@ -5,20 +5,10 @@ const LoginUser = async (req, res) => {
     const user = req.body;
     const { cookies } = req;
 
-    console.log("USER RECEBIDO NA REQUISITION");
-    console.log(user);
-
     const validation = await validationCookies(cookies);
 
     try {
         const { data, session } = await LoginUserService(user, cookies.user, validation);
-        console.log("Enviado ao cookie");
-        console.log(session);
-
-        console.log("Enviado storage");
-        console.log(data);
-
-        !cookies.user ? console.log("Cookie vai ser mandado") : console.log("Cookie já existe, Não faça nada");
 
         !cookies.user ? res.cookie("user", session.token, {
             secure: true,

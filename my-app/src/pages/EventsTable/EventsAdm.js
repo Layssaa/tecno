@@ -2,32 +2,21 @@ import classes from "../Initial/Initial.module.css";
 import eventsClasses from "./Events.module.css";
 import { useHistory } from "react-router-dom";
 import { useFormik, ErrorMessage } from 'formik';
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { MyContext } from "../../Context/Context";
 import Header from "../../Components/Header/Header";
-import * as Yup from "yup";
 
 
 export default function Events() {
-    const { events, handleRegisterEvent } = useContext(MyContext)
+    const { events, handleRegisterEvent, verifyAuthentic } = useContext(MyContext)
     const history = useHistory();
+    const [validateDate, setValidateDate] = useState();
+
+    useEffect(() => verifyAuthentic(), []);
 
     const doRegisterEvent = async (values) => {
         await handleRegisterEvent(values)
     }
-
-    const Schema = Yup.object().shape({
-        title: Yup.string()
-            .required('Required'),
-        description: Yup.string()
-            .required('Required'),
-        date: Yup.string()
-            .required('Required'),
-        time: Yup.string()
-            .required('Required'),
-        units: Yup.string()
-            .required('Required'),
-    });
 
     const formik = useFormik({
         initialValues: {
@@ -38,9 +27,13 @@ export default function Events() {
             units: '',
         },
         onSubmit: (values) => {
+            console.log("======FORM DO ADM PARA REGISTER EVENTS=====");
+            console.log(values);
             if (values.title == '' || values.units == '' || values.time == '' || values.date == '' || values.description == '') {
-                throw new Error("Insira todos os dados")
+           
+                return setValidateDate(false);
             }
+            setValidateDate(true)
             let info = values;
             doRegisterEvent(info);
             alert(JSON.stringify(info, null, 2));
@@ -112,33 +105,12 @@ export default function Events() {
                         className={eventsClasses.requests}
                         placeholder="units sold"
                         name="units"
-                        type="text"
+                        type="number"
                         onChange={formik.handleChange}
                         value={formik.values.units}
                     />
+                    {validateDate == false ? <p className={eventsClasses.ErrorMessage}>Insira todos os dados</p> : null}
 
-                    {/* {({ errors, touched }) => (
-                        <ErrorMessage name="title" />
-
-                        {errors.title && touched.title ? (<div>{errors.title}</div>) : null}
-                    <ErrorMessage name="description" />
-
-                    {errors.description && touched.description ? (<div>{errors.description}</div>) : null}
-                    <ErrorMessage name="date" />
-
-                    {errors.date && touched.date ? (<div>{errors.date}</div>) : null}
-                    <ErrorMessage name="time" />
-
-                    {errors.time && touched.time ? (<div>{errors.time}</div>) : null}
-                    <ErrorMessage name="units" />
-
-                    {errors.units && touched.units ? (<div>{errors.units}</div>) : null}
-
-
-                )
-
-
-                } */}
                     <button type="submit" className={eventsClasses.addEvent}>JOIN</button>
 
                 </form >
@@ -152,7 +124,7 @@ export default function Events() {
                     {!events ? <p className={eventsClasses.text}>vazio</p> :
                         events.map(element => {
                             return <>
-                                <p>{element.title} - {element.time}</p>
+                                <p key={element.id}>{element.title} - {element.time}</p>
                             </>
                         })}
 

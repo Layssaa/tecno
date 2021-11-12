@@ -33,7 +33,7 @@ export const RegisterEvent_ADM = async (event) => {
 };
 
 export const Logout_REQ = async () => {
-    const response = await api.get("/logout", { withCredentials: true });
+    const response = await api.get("/logout",{}, { withCredentials: true });
     console.log("==========REQ LOGOUT==========");
     console.log(response);
     return
@@ -42,6 +42,8 @@ export const Logout_REQ = async () => {
 export const verifyAuthentic_REQ = async () => {
     try {
         const { data } = await api.get("/verify", { withCredentials: true });
+        console.log("DADOS RECEBIDOS");
+        console.log(data);
         const authenticed = true;
         return { authenticed }
     } catch (error) {
